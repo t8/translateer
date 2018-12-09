@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Traducir</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="./static/css/style.css">
+</head>
+<body>
+
+<section class="hero is-fullheight" id="background">
+    <div class="hero-body">
+        <div class="container">
+            <div class="card foreground">
+                <div class="card-content">
+                    <div class="content">
+                        <center>
+                            <h1 class="title" id="title">
+                                traducir
+                            </h1>
+                            <p class="subtitle">
+                                Scan your Spanish documents to quickly translate your homework
+                            </p>
+                            <div class="field">
+                                <div class="file is-centered is-boxed is-success">
+                                    <label class="file-label">
+                                        <input id="document" class="file-input" type="file" accept="image/*" name="document" onchange="analyzeImage()" capture>
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Scan your document
+                                            </span>
+                                          </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </center>
+                        <div id="results"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="loading" class="hero is-fullheight is-dark is-hidden">
+    <div class="hero-body">
+        <div class="container">
+            <center>
+                <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </center>
+        </div>
+    </div>
+</section>
+
+<section class="hero is-fullheight is-light">
+    <div class="hero-body">
+        <div class="container">
+            <div class="page" id="translation">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src='https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js'></script>
+<script src="static/js/unsplash-source.js"></script>
+<script src="bundle.js"></script>
+
+</body>
+</html>
