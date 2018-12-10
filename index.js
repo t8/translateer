@@ -43,7 +43,7 @@ file.onchange = function(event) {
         translateWithAlternatives(result.html, 'EN')
             .then(res => {
                     console.log(res);
-                    document.getElementById("translation").innerHTML = res.html;
+                    document.getElementById("translation").innerHTML = res.translation;
                     document.getElementById("loading").classList.add("is-hidden");
                     document.getElementById("results").classList.remove("is-hidden");
                 }
