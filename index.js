@@ -1,11 +1,4 @@
-const { translate } = require('deepl-translator');
-// const cors = require('cors');
-// const express = require('express');
-// let app = express();
-// app.use(cors());
-// app.options('*', cors());
-// const translate = require('@k3rn31p4nic/google-translate-api');
-
+const { translate, translateWithAlternatives } = require('./deepl-translator-tate/index');
 
 let file = document.getElementById("document");
 
@@ -47,29 +40,15 @@ file.onchange = function(event) {
     }).then(function(result){
         console.log(result);
         document.getElementById("translation").innerHTML = result.html;
-        document.getElementById("loading").classList.add("is-hidden");
-        document.getElementById("results").classList.remove("is-hidden");
-        // translate(result.text, {to: 'en'}).then(res => {
-        //     console.log(res);
-        //     document.getElementById("translation").innerHTML = res.text;
-        //     document.getElementById("loading").classList.add("is-hidden");
-        //     document.getElementById("results").classList.remove("is-hidden");
-        // }).catch(err => {
-        //     console.error(err);
-        // });
-        translate(result.html, 'EN')
+        translateWithAlternatives(result.html, 'EN')
             .then(res => {
-                    document.getElementById("translation").innerHTML = result.html;
+                    console.log(res);
+                    document.getElementById("translation").innerHTML = res.html;
                     document.getElementById("loading").classList.add("is-hidden");
                     document.getElementById("results").classList.remove("is-hidden");
                 }
             )
             .catch(console.error);
-        // translate(result.text, { to: 'en' }).then(res => {
-        //     console.log(res.text); // OUTPUT: You are amazing!
-        // }).catch(err => {
-        //     console.error(err);
-        // });
     });
 };
 

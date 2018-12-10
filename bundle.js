@@ -1,85 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const { translate } = require('deepl-translator');
-// const cors = require('cors');
-// const express = require('express');
-// let app = express();
-// app.use(cors());
-// app.options('*', cors());
-// const translate = require('@k3rn31p4nic/google-translate-api');
-
-
-let file = document.getElementById("document");
-
-function populateTitle() {
-    let potentialTitles = [
-        "traductor",
-        "tradukisto",
-        "traduttore",
-        "kääntäjä",
-        "vertaler",
-        "مترجم",
-        "traducteur"
-    ];
-    let index = Math.floor(Math.random() * Math.floor(potentialTitles.length));
-    document.getElementById("title").innerText = potentialTitles[index];
-}
-
-function generateBackground() {
-    let hero = document.getElementById("background");
-    let photo = new UnsplashPhoto();
-    photo.randomize()
-        .fromCategory("nature")
-        .of(["mountains", "snow"])
-        .size(1000, 1200)
-        .fetch();
-    hero.style.backgroundImage = "url(" + photo.url + ")";
-    hero.style.backgroundRepeat = "no-repeat";
-    hero.style.backgroundSize = "cover";
-    hero.style.backgroundPosition = "center";
-    console.log();
-}
-
-file.onchange = function(event) {
-    let doc = file.files[0];
-    document.getElementById("background").classList.add("is-hidden");
-    document.getElementById("loading").classList.remove("is-hidden");
-    Tesseract.recognize(doc, {
-        lang: 'spa'
-    }).then(function(result){
-        console.log(result);
-        document.getElementById("translation").innerHTML = result.html;
-        document.getElementById("loading").classList.add("is-hidden");
-        document.getElementById("results").classList.remove("is-hidden");
-        // translate(result.text, {to: 'en'}).then(res => {
-        //     console.log(res);
-        //     document.getElementById("translation").innerHTML = res.text;
-        //     document.getElementById("loading").classList.add("is-hidden");
-        //     document.getElementById("results").classList.remove("is-hidden");
-        // }).catch(err => {
-        //     console.error(err);
-        // });
-        translate(result.html, 'EN')
-            .then(res => {
-                    document.getElementById("translation").innerHTML = result.html;
-                    document.getElementById("loading").classList.add("is-hidden");
-                    document.getElementById("results").classList.remove("is-hidden");
-                }
-            )
-            .catch(console.error);
-        // translate(result.text, { to: 'en' }).then(res => {
-        //     console.log(res.text); // OUTPUT: You are amazing!
-        // }).catch(err => {
-        //     console.error(err);
-        // });
-    });
-};
-
-populateTitle();
-generateBackground();
-},{"deepl-translator":2}],2:[function(require,module,exports){
 module.exports = require('./src/deepl-translator');
 
-},{"./src/deepl-translator":5}],3:[function(require,module,exports){
+},{"./src/deepl-translator":4}],2:[function(require,module,exports){
 module.exports = ({ protocol, hostname, path }, postBody) => {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
@@ -96,11 +18,11 @@ module.exports = ({ protocol, hostname, path }, postBody) => {
   });
 };
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function (Buffer){
 const request = require('./request-helper');
 
-const DEEPL_HOSTNAME = 'www2.deepl.com';
+const DEEPL_HOSTNAME = 'deepl.tateberenbaum.com';
 const DEEPL_ENDPOINT = '/jsonrpc';
 
 function getHandleJobsBody(texts, targetLanguage, sourceLanguage, beginning) {
@@ -166,8 +88,8 @@ function getSplitSentencesBody(texts, sourceLanguage) {
 function getRequestOptions(postBody) {
   return {
     hostname: DEEPL_HOSTNAME,
-    port: 443,
-    protocol: 'https:',
+    port: 80,
+    protocol: 'http:',
     path: DEEPL_ENDPOINT,
     method: 'POST',
     headers: {
@@ -210,7 +132,7 @@ module.exports = {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"./request-helper":3,"buffer":9}],5:[function(require,module,exports){
+},{"./request-helper":2,"buffer":9}],4:[function(require,module,exports){
 const languages = require('./languages');
 const {
   validateText,
@@ -390,7 +312,7 @@ module.exports = {
   wordAlternatives,
 };
 
-},{"./deepl-api-helper":4,"./languages":6,"./validators":7,"os":11}],6:[function(require,module,exports){
+},{"./deepl-api-helper":3,"./languages":5,"./validators":6,"os":11}],5:[function(require,module,exports){
 module.exports = {
   EN: 'English',
   DE: 'German',
@@ -401,7 +323,7 @@ module.exports = {
   PL: 'Polish',
 };
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 const languages = require('./languages');
 
 module.exports = {
@@ -432,7 +354,64 @@ module.exports = {
     ),
 };
 
-},{"./languages":6}],8:[function(require,module,exports){
+},{"./languages":5}],7:[function(require,module,exports){
+const { translate, translateWithAlternatives } = require('./deepl-translator-tate/index');
+
+let file = document.getElementById("document");
+
+function populateTitle() {
+    let potentialTitles = [
+        "traductor",
+        "tradukisto",
+        "traduttore",
+        "kääntäjä",
+        "vertaler",
+        "مترجم",
+        "traducteur"
+    ];
+    let index = Math.floor(Math.random() * Math.floor(potentialTitles.length));
+    document.getElementById("title").innerText = potentialTitles[index];
+}
+
+function generateBackground() {
+    let hero = document.getElementById("background");
+    let photo = new UnsplashPhoto();
+    photo.randomize()
+        .fromCategory("nature")
+        .of(["mountains", "snow"])
+        .size(1000, 1200)
+        .fetch();
+    hero.style.backgroundImage = "url(" + photo.url + ")";
+    hero.style.backgroundRepeat = "no-repeat";
+    hero.style.backgroundSize = "cover";
+    hero.style.backgroundPosition = "center";
+    console.log();
+}
+
+file.onchange = function(event) {
+    let doc = file.files[0];
+    document.getElementById("background").classList.add("is-hidden");
+    document.getElementById("loading").classList.remove("is-hidden");
+    Tesseract.recognize(doc, {
+        lang: 'spa'
+    }).then(function(result){
+        console.log(result);
+        document.getElementById("translation").innerHTML = result.html;
+        translateWithAlternatives(result.html, 'EN')
+            .then(res => {
+                    console.log(res);
+                    document.getElementById("translation").innerHTML = res.html;
+                    document.getElementById("loading").classList.add("is-hidden");
+                    document.getElementById("results").classList.remove("is-hidden");
+                }
+            )
+            .catch(console.error);
+    });
+};
+
+populateTitle();
+generateBackground();
+},{"./deepl-translator-tate/index":1}],8:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -2501,4 +2480,4 @@ exports.homedir = function () {
 	return '/'
 };
 
-},{}]},{},[1]);
+},{}]},{},[7]);
