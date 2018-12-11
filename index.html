@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Traducir</title>
+    <title>Translateer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="./static/css/style.css">
 </head>
@@ -20,12 +20,12 @@
                                 traducir
                             </h1>
                             <p class="subtitle">
-                                Scan your Spanish documents to quickly translate your homework
+                                Scan your documents to quickly translate your homework
                             </p>
                             <div class="field">
                                 <div class="file is-centered is-boxed is-success">
                                     <label class="file-label">
-                                        <input id="document" class="file-input" type="file" accept="image/*" name="document" onchange="analyzeImage()" capture>
+                                        <input id="document" class="file-input" type="file" accept="image/*" name="document" capture>
                                         <span class="file-cta">
                                             <span class="file-icon">
                                                 <i class="fas fa-upload"></i>
@@ -38,7 +38,6 @@
                                 </div>
                             </div>
                         </center>
-                        <div id="results"></div>
                     </div>
                 </div>
             </div>
@@ -51,21 +50,38 @@
         <div class="container">
             <center>
                 <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                <p class="subtitle" id="progress"></p>
             </center>
         </div>
     </div>
 </section>
 
-<section class="hero is-fullheight is-light">
+<section id="results" class="hero is-fullheight is-light is-hidden">
     <div class="hero-body">
         <div class="container">
-            <div class="page" id="translation">
+            <div class="columns">
+                <div class="column is-half">
+                    <h2 class="title is-4">Before</h2>
+                    <img id="before-img" />
+                </div>
+                <div class="column is-half">
+                    <h2 class="title is-4">After</h2>
+                    <div class="page" id="translation">
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            Don't use this.
+        </p>
+    </div>
+</footer>
 
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 <script src='https://cdn.jsdelivr.net/gh/naptha/tesseract.js@v1.0.14/dist/tesseract.min.js'></script>

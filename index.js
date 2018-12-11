@@ -33,16 +33,24 @@ function generateBackground() {
 
 file.onchange = function(event) {
     let doc = file.files[0];
+    let img = document.getElementById("before-img");
+    if(window.FileReader) {
+        let reader = new FileReader();
+        if (doc && doc.type.match('image.*')) {
+            reader.readAsDataURL(doc);
+        } else {
+            img.src = "";
+        }
+        reader.onloadend = function (e) {
+            img.src = reader.result;
+        }
+    }
     document.getElementById("background").classList.add("is-hidden");
     document.getElementById("loading").classList.remove("is-hidden");
-    Tesseract.recognize(doc, {
-        lang: 'spa'
-    }).then(function(result){
-        console.log(result);
-        document.getElementById("translation").innerHTML = result.html;
-        translateWithAlternatives(result.html, 'EN')
+    Tesseract.recognize(doc).then(function(result){
+        document.getElementById("progress").innerText = "Successfully scanned document with " + result.confidence + "% confidence. Dope";
+        translateWithAlternatives(result.text, 'EN')
             .then(res => {
-                    console.log(res);
                     document.getElementById("translation").innerHTML = res.translation;
                     document.getElementById("loading").classList.add("is-hidden");
                     document.getElementById("results").classList.remove("is-hidden");

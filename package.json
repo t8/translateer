@@ -1,18 +1,10 @@
 {
-  "name": "kinglish",
+  "name": "translateer",
   "version": "1.0.0",
-  "description": "Translates any given worksheet in Spanish so I don't have to",
+  "description": "Translates any given worksheet in most languages so I don't have to",
   "main": "index.js",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.5.0",
-    "@k3rn31p4nic/google-translate-api": "^1.0.5",
     "browserify": "^16.2.3",
-    "bulma": "^0.7.2",
-    "cors": "^2.8.5",
-    "deepl-translator": "^1.2.1",
-    "express": "^4.16.4",
-    "google-translate-api": "^2.3.0",
-    "node-deepl": "^1.0.0",
     "unsplash-source-js": "^1.0.0"
   },
   "devDependencies": {},
@@ -21,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/n/a.git"
+    "url": "git+https://github.com/tbaumer22/translateer.git"
   },
   "keywords": [
     "translator",
@@ -31,7 +23,7 @@
   "author": "Tate Berenbaum",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/n/a/issues"
+    "url": "https://github.com/tbaumer22/translateer/issues"
   },
-  "homepage": "https://github.com/n/a#readme"
+  "homepage": "https://github.com/tbaumer22/translateer/#readme"
 }
